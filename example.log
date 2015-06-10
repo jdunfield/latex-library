@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2013.8.29)  10 JUN 2015 00:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2013.8.29)  10 JUN 2015 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -513,6 +513,8 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 35.
 LaTeX Info: Redefining \pageref on input line 35.
 LaTeX Info: Redefining \nameref on input line 35.
+
+(./example.out) (./example.out)
 \@outlinefile=\write3
 \openout3 = `example.out'.
 
@@ -582,47 +584,41 @@ LaTeX Font Info:    Font shape `OT1/bch/bx/n' in size <10> not available
 ]
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 50.
+less on input line 65.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
-(Font)              using `OT1/cmss/bx/n' instead on input line 59.
+(Font)              using `OT1/cmss/bx/n' instead on input line 74.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 63.
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 63.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 78.
 
-LaTeX Font Info:    No file OMScmss.fd. on input line 63.
+LaTeX Font Info:    No file OMScmss.fd. on input line 78.
 
 LaTeX Font Warning: Font shape `OMS/cmss/bx/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textsection' on input line 63.
+(Font)              for symbol `textsection' on input line 78.
 
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 63.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
  (./example.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 63.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 63.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 78.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
+Package rerunfilecheck Info: File `example.out' has not changed.
+(rerunfilecheck)             Checksum: 0818E118CEC300B645C7C25EC5D47475;97.
 
-
-Package rerunfilecheck Warning: File `example.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `example.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  0818E118CEC300B645C7C25EC5D47475;97.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 63.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
  ) 
 Here is how much of TeX's memory you used:
- 8092 strings out of 493316
- 119105 string characters out of 6137930
- 215987 words of memory out of 5000000
- 11420 multiletter control sequences out of 15000+600000
- 19054 words of font info for 64 fonts, out of 8000000 for 9000
+ 8101 strings out of 493316
+ 119203 string characters out of 6137930
+ 218987 words of memory out of 5000000
+ 11425 multiletter control sequences out of 15000+600000
+ 19648 words of font info for 65 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 60i,13n,94p,250b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,28n,94p,250b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on example.dvi (2 pages, 6912 bytes).
+Output written on example.dvi (2 pages, 7888 bytes).

@@ -39,11 +39,26 @@ Currently, documentation is only in TeX comments inside the various \textvtt{.st
 
 \section{rulelinks.sty}
 
-\[
-    \Infer{\EVar}
-         {}
-         {\Gamma, x : A, \Gamma' \entails x : A}
-\]
+\begin{figure}[htbp]
+  \centering
+
+  \judgbox{\Gamma \entails e : A}{Under typing assumptions $\Gamma$, expression $e$ has type $A$}
+  \begin{mathpar}
+      \centerruleplaceholder{
+           \Infer{\EVar}
+                 {}
+                 {\Gamma, x : A, \Gamma' \entails x : A}
+      }{
+          No subsumption rule,
+          \\
+          because I hate freedom
+     }
+  \end{mathpar}
+  
+  \caption{Typing}
+  \label{fig:typing}
+\end{figure}
+
 Using the macro \texttt{\Backslash}\textvtt{EVar} for the first time anchors a hyperlink pointed to
 by subsequent uses: \EVar.
 
