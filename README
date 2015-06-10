@@ -1,0 +1,34 @@
+I've been using LaTeX in anger for almost 15 years.  Over that time, I've been
+copying and pasting macros from the last-written paper to whichever one I'm currently
+working on.  This is barely adequate when I don't have coauthors, much less when I do.
+
+The main purpose of this repository is to organize and document this tangle of
+macros, so my coauthors will be happier.  If you're not one of my coauthors, and you
+find (some of) this useful, so much the better.
+
+* joshuadunfield.sty: A semi-organized pack of wild macros.
+
+* goodcharter.sty: Use Bitstream Charter as the main font without making it
+  impossible to use bold CM sans serif (as the charter.sty package does,
+  for reasons I don't understand).
+
+* etal.sty: Macros for "et al." and similar abbreviations with correct spelling,
+  punctuation, and spacing.
+
+* llproof.sty: Provides an environment `llproof' for line-by-line proofs.
+
+* rulelinks.sty: Macros for inference rule names that hyperlink back to where the
+  rule was defined.
+
+* purple.cls: A more colourful article class.  I wrote this recently and haven't
+  quite decided if I like it, so I wouldn't bet that you will.
+
+* mathpartir.sty: Didier Rémy's inference rules package.  I didn't write this,
+  and I don't recall modifying it, but I've learned through hard
+  experience *never* to assume that a different version of a package
+  will work, so I'm including it here.
+
+* example.tex: Example, currently only showing the "rules" class.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Copyright (c) Joshua Dunfield; released under the terms of the GNU General Public License, version 2 or later.
