@@ -1,0 +1,69 @@
+\def\OPTIONConf{0}%
+\def\OPTIONArxiv{0}%
+%
+% \documentclass{article}
+\documentclass{purple}
+% `purple' is an experimental class with unusual formatting
+
+\usepackage{mathpartir}
+\usepackage{amsmath}
+
+
+\usepackage{srcltx}
+\usepackage{goodcharter}
+\usepackage{euler}
+
+\usepackage{joshuadunfield}
+\usepackage{llproof}
+\usepackage{rulelinks}
+
+
+
+\newcommand{\unitty}{\tyname{1}}
+\newcommand{\rulename}[1]{\textsf{#1}}
+\newcommand{\elabtyperulename}[1]{\rulename{\textcolor{dDigPurple}{E#1}}}
+
+\newrulecommand{EVar}{\elabtyperulename{var}}
+
+
+
+\title{Example}
+
+\author{Joshua Dunfield}
+
+
+\begin{document}
+\maketitle
+
+Currently, documentation is only in TeX comments inside the various \textvtt{.sty} and \textvtt{.cls} files.
+
+\section{rulelinks.sty}
+
+\[
+    \Infer{\EVar}
+         {}
+         {\Gamma, x : A, \Gamma' \entails x : A}
+\]
+Using the macro \texttt{\Backslash}\textvtt{EVar} for the first time anchors a hyperlink pointed to
+by subsequent uses: \EVar.
+
+\newpage
+
+\section{Example figure}
+
+\begin{figure}[htbp]
+  \centering
+  
+  FIGURES FOR THE FIGURE GOD!  CAPTIONS FOR THE THRONE OF CAPTIONS!
+
+  \caption{A caption with \emph{colour}?  Whatever will they think of next?}
+  \label{fig:example}
+\end{figure}
+
+\end{document}
+
+
+% Local Variables: 
+% mode: latex
+% TeX-master: example
+% End: 
