@@ -7,4 +7,4 @@ example.pdf: example.tex *.cls *.sty
 	pdflatex example
 
 clean:
-	rm -f example.dvi example.pdf example.aux example.out ??*~
+	rm -f example.dvi example.pdf example.aux example.log example.out ??*~
