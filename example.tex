@@ -7,7 +7,7 @@
 
 \usepackage{mathpartir}
 \usepackage{amsmath}
-
+\usepackage{marvosym}  % for \Pointinghand / \Hand in llproof
 
 \usepackage{srcltx}
 \usepackage{goodcharter}
@@ -18,6 +18,8 @@
 \usepackage{rulelinks}
 
 
+
+\newcommand{\macroname}[1]{\texttt{\Backslash}\textvtt{#1}}
 
 \newcommand{\unitty}{\tyname{1}}
 \newcommand{\rulename}[1]{\textsf{#1}}
@@ -59,10 +61,133 @@ Currently, documentation is only in TeX comments inside the various \textvtt{.st
   \label{fig:typing}
 \end{figure}
 
-Using the macro \texttt{\Backslash}\textvtt{EVar} for the first time anchors a hyperlink pointed to
+Using the macro \macroname{EVar} for the first time anchors a hyperlink pointed to
 by subsequent uses: \EVar.
 
-\newpage
+
+
+\clearpage
+
+\section{llproofs.sty}
+
+\newcommand{\ctxoutsym}{{\dashv}}
+\newcommand{\ctxout}[1]{\mathrel{\ctxoutsym}{#1}}
+
+\newcommand{\judgetp}[2]{{#1} \entails {#2}}
+\newcommand{\judgetpPf}[3]{\Pf{#1}{\entails}{#2}{#3}}
+
+\newcommand{\declsynjudg}[3]{{#1} \entails {#2} \Rightarrow {#3}}
+\newcommand{\declsynjudgPf}[4]{\ePf{#1}{{#2} \Rightarrow {#3}}{#4}}
+\newcommand{\synjudg}[4]{{#1} \entails {#2} \Rightarrow {#3} \ctxout{#4}}
+\newcommand{\synjudgPf}[5]{\ePf{#1}{{#2} \Rightarrow {#3} \ctxout{#4}}{#5}}
+
+\newcommand{\substextendsym}{\longrightarrow}
+\newcommand{\substextend}[2]{{#1} \substextendsym {#2}}
+\newcommand{\substextendPf}[3]{\Pf{#1}{\substextendsym}{#2}{#3}}
+
+\newrulecommand{DeclVar}{\rulename{DeclVar}}
+\newrulecommand{Var}{\rulename{Var}}
+
+\newcommand{\FEV}[1]{\mathsf{FEV}(#1)}  % free existential variables
+
+This example of the \textvtt{llproof} environment is adapted from
+Dunfield and Krishnaswami, ICFP 2013.  The source for this file
+(example.tex) includes definitions of per-judgment macros, as well
+as the \macroname{DerivationProofCase} macro.
+
+The relevant part of the statement being proved is:
+
+\begin{quote}
+   Given $\substextend{\Gamma}{\Omega}$ and $\judgetp{\Gamma}{A}$:
+
+     If $\declsynjudg{[\Omega]\Gamma}{e}{A}$
+     \\
+     then there exist $\Delta$, $\Omega'$, and $A'$
+     \\
+     such that
+     $\substextend{\Delta}{\Omega'}$ and 
+     $\substextend{\Omega}{\Omega'}$ and 
+     $\synjudg{\Gamma}{e}{A'}{\Delta}$ and 
+     $A = [\Omega']A'$. 
+\end{quote}
+
+  \begin{itemize}
+     \DerivationProofCase{\DeclVar}
+          {(x : A) \in [\Omega]\Gamma}
+          {\declsynjudg{[\Omega]\Gamma}{x}{A}}
+          
+          \begin{llproof}
+            \inPf{(x : A)} {[\Omega]\Gamma}  {Premise}
+            \substextendPf{\Gamma}{\Omega}   {Given}
+            \inPf{(x : A')}{\Gamma\text{~where $[\Omega]A' = [\Omega]A$}}   {From definition of context application}
+                 \trailingjust{(definition omitted in this example)}
+            \LetPf{\Delta}{\Gamma} {}
+            \LetPf{\Omega'}{\Omega} {}
+\Hand       \substextendPf{\Gamma}{\Omega}   {Given}
+\Hand       \substextendPf{\Omega}{\Omega}   {By Lemma 20 (Reflexivity)}
+\Hand       \synjudgPf{\Gamma}{x}{A'}{\Gamma}   {By \Var}
+            \proofsep
+                   \eqPf{[\Omega]A'}{[\Omega]A}   {Above}
+\Hand              \continueeqPf{A}   {$\FEV{A} = \emptyset$}
+          \end{llproof}
+  \end{itemize}
+
+Notes:
+\begin{itemize}
+\item The line ``(definition omitted in this example)'' is a ``trailing justification'' (\macroname{trailingjust}), for when the justification for a step would be too wide to fit on the page.
+
+\item The last two lines use \macroname{eqPf} and \macroname{continueeqPf}, respectively.
+
+\item The lines marked ``\Pointinghand'' follow my convention for marking conclusions.  Many theorems have the form ``if \dots then
+  Q1 and Q2 and \dots''.  These conclusions often aren't all proved at the end
+  of the argument, especially when using the induction hypothesis.
+  
+  In this example, it so happens that they \emph{almost} all come at the end,
+  but the final part ($A = [\Omega']A'$ in the statement) needs a transitive
+  equality.  Without this convention, I'd either have to repeat all the ``early''
+  Q's at the end, or have to scan the entire proof to see if I'd proved
+  everything.  This convention also facilitates eliding very minor
+  reasoning steps: the line $\substextend{\Gamma}{\Omega}$
+  isn't \emph{literally} the desired conclusion $\substextend{\Delta}{\Omega'}$,
+  but the presence of ``\Pointinghand'' means that the reader knows that the line
+  is supposed to match $\substextend{\Delta}{\Omega'}$, and (hopefully)
+  will notice the equalities $\Delta = \Gamma$ and $\Omega' = \Omega$.
+
+  (Deciding which steps are trivial enough to slide under the rug is a
+  matter of taste, and I sometimes disagree with my own past decisions.)
+
+  For multi-step equational reasoning with \macroname{continueeqPf},
+  my convention is that ``\Pointinghand'' is marking the ``endpoints'' of
+  the equality, here $[\Omega]A'$ and $A$, not the last step ($[\Omega]A = A$).
+
+\item The extra space before the ``$[\Omega]A' = [\Omega]A$'' line
+  is produced by \macroname{proofsep}.
+\end{itemize}
+
+A useful macro for the ``justification'' column, not shown in the above
+example, is \macroname{ditto}, which produces \ditto.
+For instance, applying the i.h.\ in this
+proof kicks out a four-part conclusion (like the four lines marked with
+``\Pointinghand''), so I'd give \macroname{ditto} as the last argument
+for the second, third, and fourth parts.  To me, \macroname{ditto} has
+different semantics than repeating the justification; I wouldn't write
+the following, because Lemma 20 only produces one result.
+
+\begin{llproof}
+  \substextendPf{\Gamma}{\Gamma}  {By Lemma 20 (Reflexivity)}
+  \substextendPf{\Delta}{\Delta}  {\ditto~~~~\textcolor{red}{(not in my idiolect)}}
+\end{llproof}
+
+I'm very particular about this kind of thing, but you don't have to be.  I
+believe---as usual in discussions of mathematical writing, without any real
+evidence---that most of the benefit of \textvtt{llproof} comes from the line-by-line
+structure, which makes it much harder to slide \emph{all} the justifications under
+the rug, while making it easier to enforce choices about what steps to include or
+omit.  For example, I usually don't explicitly note that the i.h.\ is being applied to a
+smaller derivation, or whatever.  But if I have
+a proof with a weird induction measure, I can easily check whether I'm showing that
+it's being applied correctly by looking for ``By i.h.'' lines, and checking that they're preceded by a line saying that something is smaller.
+
 
 \section{Example figure}
 
