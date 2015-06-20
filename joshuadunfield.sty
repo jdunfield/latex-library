@@ -1,4 +1,4 @@
-\ProvidesClass{joshuadunfield}[2015/06/09 - First release]
+\ProvidesClass{joshuadunfield}[2015/06/20 - Minor revision]
 
 \RequirePackage{etex}
 \RequirePackage{amsmath}
@@ -426,7 +426,17 @@
 \newenvironment{rclll}{\vspace{1pt} \begin{center} ~\!\!\begin{array}[t]{r@{~~}c@{~~}l@{}l@{}l}}{\end{array}\end{center}}
 \newenvironment{grammar}{\vspace{1pt} \begin{center} ~\!\!\begin{tabular}[t]{lr@{~~}c@{~~}lll}}{\end{tabular}\end{center}}
 
-\newenvironment{mathdispl}{\ifnum\OPTIONConf=1\vspace{-2ex}\else\vspace{-3.0ex}\fi \begin{center}\begin{mathpar} ~\!\!}{\end{mathpar}\end{center}}
+
+% \newenvironment{mathdispl}{\begin{displ}~$\begin{mathpar} ~\!\!}{\end{mathpar}$\end{displ}}
+\newenvironment{mathdispl}{\begin{mathpar}}{\end{mathpar}}
+
+% \RequirePackage{environ}
+% \NewEnviron{mathdispl}{%
+%     \begin{mathpar}
+%         \BODY
+%     \end{mathpar}
+% }
+
 
 \newcommand{\parasection}[1]{\paragraph*{#1.}}
 
@@ -559,14 +569,14 @@
 % 
 
 \ifnum\OPTIONConf=1
-  \newcommand{\judgboxfontsize}[1]{\large #1}
+  \newcommand{\judgboxfontsize}[1]{\mathsz{11pt}{#1}}
 \else
-  \newcommand{\judgboxfontsize}[1]{\fontsz{11pt}{#1}}
+  \newcommand{\judgboxfontsize}[1]{\mathsz{12pt}{#1}}
 \fi
 
 \newcommand{\judgbox}[2]{%
-      {\raggedright \textgraybox{\judgboxfontsize{\ensuremath{#1}}}\!\begin{tabular}[c]{l} #2 \end{tabular} %
-      \ifnum\OPTIONConf=1 \\[-2.1ex] \else \\[-1.8ex] \fi%
+      {\raggedright \textgraybox{\ensuremath{\judgboxfontsize{#1}}}\!\begin{tabular}[c]{l} #2 \end{tabular} %
+      \ifnum\OPTIONConf=1 \\[-1.5ex] \else \\[-1.8ex] \fi%
 }}
 
 % Horribly named variants of \judgbox.  The \judgbox spacing is supposed
