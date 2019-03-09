@@ -1,3 +1,6 @@
+%  2019/03/09 - Rename to jdunfield
+%  2015/06/09 - First release
+
 \ProvidesClass{purple}[2015/06/09 - First release]
 
 %
@@ -11,7 +14,7 @@
 \newcommand{\PassDownOptionToClass}[2]{\DeclareOption{#1}{\PassOptionsToClass{#1}{#2}}}
 
 
-\usepackage{joshuadunfield}
+\usepackage{jdunfield}
 
 %%% Set up options
 
