@@ -1,3 +1,8 @@
+% Revision history:
+%
+%   2019/03/09    Change \judgbox to allow \\ in the judgment (not just in the judgment reading); various other changes
+%   2015/06/20    Minor revision (of what?)
+
 \ProvidesClass{joshuadunfield}[2015/06/20 - Minor revision]
 
 \RequirePackage{etex}
@@ -32,13 +37,13 @@
 % dFaint, dGray, dDark, dAlmostBlack are shades of gray.
 %
 \definecolor{dRed}{rgb}{0.65, 0.0, 0.0}
-\definecolor{dDkRed}{rgb}{0.35, 0.0, 0.0}
+\definecolor{dDkRed}{rgb}{0.25, 0.0, 0.0}
 \definecolor{dGreen}{rgb}{0.0, 0.65, 0.0}
-\definecolor{dDkGreen}{rgb}{0.0, 0.35, 0.0}
+\definecolor{dDkGreen}{rgb}{0.0, 0.2, 0.0}
 \definecolor{dBlue}{rgb}{0.0, 0.0, 0.65}
 \definecolor{dLightBlue}{rgb}{0.4, 0.4, 0.9}
 \definecolor{dLighterBlue}{rgb}{0.8, 0.8, 1.0}
-\definecolor{dDkBlue}{rgb}{0.0, 0.0, 0.45}
+\definecolor{dDkBlue}{rgb}{0.0, 0.0, 0.25}
 \definecolor{dLightPurple}{rgb}{0.9, 0.5, 0.9}
 \definecolor{dLighterPurple}{rgb}{1.0, 0.7, 1.0}
 \definecolor{dPurple}{rgb}{0.65, 0.0, 0.65}
@@ -70,6 +75,8 @@
 \newcommand{\redhi}[1]{\hilite{red!40}{#1}}
 \newcommand{\yellhi}[1]{\hilite{yellow}{#1}}
 \newcommand{\fighi}[1]{\hilite{yellow!40}{#1}}
+\newcommand{\texthi}[1]{\textcolorbox{yellow!40}{#1}}
+\newcommand{\sfighi}[1]{\,\hilite{yellow!40}{#1}\,} % extra spacing
 \newcommand{\purplehi}[1]{\hilite{purple!40}{#1}}
 \newcommand{\purpleop}[1]{\mathrel{\hilite{purple!40}{{#1}}}}
 
@@ -88,9 +95,13 @@
 
 
 %\newcommand{\textvtt}[1]{{\normalfont\fontfamily{cmvtt}\selectfont {#1}}}
-\newcommand{\textvtt}[1]{\text{\normalfont\fontfamily{cmvtt}\selectfont {#1}}}
+\newcommand{\runonvtt}{\normalfont\fontfamily{cmvtt}\selectfont}
+\newcommand{\textvtt}[1]{\text{\runonvtt{#1}}}
 %\newcommand{\textvtt}[1]{\text{\normalfont\fontfamily{cmvtt}\selectfont\fontsz{11.0pt}{#1}}}
 \newcommand{\textbi}[1]{\textit{\bfseries#1}}
+
+
+\newcommand{\code}[1]{\text{\textvtt{#1}}}
 
 %
 % Non-``run-on'' font macros that also set the line spacing to 1.2*the font size.
@@ -105,6 +116,11 @@
 
 \newcommand{\mathsz}[2]{\text{\fontsz{#1}{$#2$}}}
 
+\newcommand{\runonfontsz}[1]{\zzfontsz=#1%
+\fontsize{\zzfontsz}{1.2\zzfontsz}\selectfont}
+
+\newcommand{\runonmathsz}[1]{\zzfontsz=#1%
+\fontsize{\zzfontsz}{1.2\zzfontsz}\selectfont}
 
 %
 % Second, macros for particular animals (keywords, function names, etc.):
@@ -210,6 +226,7 @@
 \newcommand{\Pair}[2]{\textvtt{(}#1\textvtt{,}\;#2\textvtt{)}}
 \newcommand{\xFix}{\ensuremath{\keyword{fix}}}
 \newcommand{\Fix}[1]{\xFix~#1.\:}
+\newcommand{\fix}[1]{\Fix{#1}}
 
 
 %
@@ -228,7 +245,8 @@
 % Unfiled
 %
 \newcommand{\bnfas}{\ensuremath{\mathrel{::=}}}
-\newcommand{\bnfalt}{\mathrel{\mid}}
+\newcommand{\bnfalt}{\mathrel{\hspace{0.2ex}\mid\hspace{0.2ex}}}
+%\newcommand{\bnfalt}{\;{\mid}\;}
 \newcommand{\bnfaltBRK}{\) \\ &&& \(\hspace{-1.02ex}\bnfalt}
 
 
@@ -257,7 +275,7 @@
 \newcommand{\Secref}[1]{Sec.\ \ref{#1}}
 
 \newcommand{\Lemmaref}[1]{Lemma \ref{#1} (\nameref{#1})}   % name and number
-\newcommand{\Lemref}[1]{\Lemma \ref{#1}}   % number only
+\newcommand{\Lemref}[1]{Lemma \ref{#1}}   % number only
 
 \newcommand{\Chapterref}[1]{Chapter \ref{#1}}
 \newcommand{\Listingref}[1]{Listing \ref{#1}}
@@ -388,7 +406,7 @@
 %
 %
 
-\newcommand{\arrayenv}[1]{\renewcommand{\arraystretch}{1} \begin{array}[t]{@{}c@{}}#1\end{array}}
+\newcommand{\arrayenv}[1]{ \begin{array}[t]{@{}c@{}}#1\end{array}}
 \newcommand{\arrayenvc}[1]{\renewcommand{\arraystretch}{1} \begin{array}[c]{@{}c@{}}#1\end{array}}
 \newcommand{\arrayenvcl}[1]{\renewcommand{\arraystretch}{1} \begin{array}[c]{@{}l@{}}#1\end{array}}
 \newcommand{\arrayenvr}[1]{\renewcommand{\arraystretch}{1} \begin{array}[t]{@{}r@{}}#1\end{array}}
@@ -417,18 +435,20 @@
 %    `displ' for displayed text,
 %    `mathdispl' for displayed mathpar,
 %    `rclll' for equations (with extra left-aligned columns),
-%    `grammar' for BNF.
+%    `grammar' for BNF,
+%    `xgrammar' for BNF without an enclosing `center'
 %
 
 \newenvironment{displ}{\vspace{1pt} \begin{center} ~\!\!}{\end{center}}
-\newcommand{\vertcenter}[1]{\begin{tabular}{c}#1\end{tabular}}
+\newcommand{\vertcenter}[1]{\begin{tabular}{@{}c@{}}#1\end{tabular}}
 
-\newenvironment{rclll}{\vspace{1pt} \begin{center} ~\!\!\begin{array}[t]{r@{~~}c@{~~}l@{}l@{}l}}{\end{array}\end{center}}
-\newenvironment{grammar}{\vspace{1pt} \begin{center} ~\!\!\begin{tabular}[t]{lr@{~~}c@{~~}lll}}{\end{tabular}\end{center}}
+\newenvironment{rclll}{\vspace{1pt} \begin{center} ~\!\!\begin{array}[t]{@{}r@{~~}c@{~~}l@{}l@{}l@{}}}{\end{array}\end{center}}
+\newenvironment{grammar}{\vspace{1pt} \begin{center} ~\!\!\begin{tabular}[t]{@{}lr@{~~}c@{~~}lll@{}}}{\end{tabular}\end{center}}
+\newenvironment{xgrammar}{~\!\!\begin{tabular}[t]{@{}lr@{~~}c@{~~}lll@{}}}{\end{tabular}}
 
 
 % \newenvironment{mathdispl}{\begin{displ}~$\begin{mathpar} ~\!\!}{\end{mathpar}$\end{displ}}
-\newenvironment{mathdispl}{\begin{mathpar}}{\end{mathpar}}
+\newenvironment{mathdispl}{\begin{mathpar}}{\end{mathpar}\ignorespacesafterend}
 
 % \RequirePackage{environ}
 % \NewEnviron{mathdispl}{%
@@ -445,6 +465,7 @@
 % Letters
 %
 
+\let\C\undefined
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\Dee}{\mathcal{D}}
 \newcommand{\E}{\mathcal{E}}
@@ -464,6 +485,7 @@
 \newcommand{\skipwidth}[1]{\settowidth{\zzskipwidthlen}{\ensuremath{#1}}\hspace{\zzskipwidthlen}}
 \newcommand{\printsavewidth}[1]{\settowidth{\zzskipwidthlen}{\ensuremath{#1}}#1}
 \newcommand{\skipsavedwidth}{\hspace{\zzskipwidthlen}}
+\newcommand{\unskipsavedwidth}{\hspace{-\zzskipwidthlen}}
 
 \newcommand{\raiseline}[1]{\raisebox{2.5ex}[0pt]{#1}}
 \newcommand{\raisehalf}[1]{\raisebox{1.2ex}[0pt]{#1}}
@@ -501,7 +523,7 @@
 %
 
 \def \TirNameStyle #1{{#1}}
-\newcommand{\Infer}[3]{\inferrule*[right={\text{\strut#1}}]{{}#2\mathstrut}{{}#3\mathstrut}}
+\newcommand{\Infer}[3]{\inferrule*[right={\text{#1\strut}}]{{}#2\mathstrut}{\hspace*{-0.5pt}#3\mathstrut\hspace*{1.1pt}}}
 
 %
 % Inside a mathpar, I sometimes want to include some text, like
@@ -568,15 +590,29 @@
 % For less familiar judgments than typing, this is even more important.
 % 
 
+
 \ifnum\OPTIONConf=1
-  \newcommand{\judgboxfontsize}[1]{\mathsz{11pt}{#1}}
+  \newcommand{\runonjudgboxfontsz}{\runonmathsz{11pt}}
 \else
-  \newcommand{\judgboxfontsize}[1]{\mathsz{12pt}{#1}}
+  \newcommand{\runonjudgboxfontsz}{\runonmathsz{11pt}}
 \fi
+\newcommand{\judgboxfontsize}[1]{{\runonjudgboxfontsz #1}}
+
+\newcommand{\loudjudgbox}[3]{%
+      {\ifx\\#1\\%empty
+        \else %not empty
+           \ifnum\OPTIONLoudLabels=1
+               \judgboxfontsize{\text{\textcolor{dBlue}{\textvtt{\Backslash{#1}}}}}
+           \fi
+        \fi
+        \raggedright \textgraybox{\ensuremath{\judgboxfontsize{#2}}}\!%
+        \fontsz{9pt}{\begin{tabular}[c]{l} #3 \end{tabular}}%
+       }~\\[-0.5ex]
+}
 
 \newcommand{\judgbox}[2]{%
-      {\raggedright \textgraybox{\ensuremath{\judgboxfontsize{#1}}}\!\begin{tabular}[c]{l} #2 \end{tabular} %
-      \ifnum\OPTIONConf=1 \\[-1.5ex] \else \\[-1.8ex] \fi%
+      {\raggedright \renewcommand{\arraystretch}{1}\textgraybox{\ensuremath{ \runonjudgboxfontsz \arrayenvl{ #1 }}}\!\begin{tabular}[c]{l} #2 \end{tabular} %
+      \ifnum\OPTIONConf=1 \\[-1.5ex] \else \\[-1.5ex] \fi%
 }}
 
 % Horribly named variants of \judgbox.  The \judgbox spacing is supposed
@@ -616,9 +652,9 @@
 % to list the cases of a proof.
 %
 
-\newcommand{\ProofCaseRule}[1]{\item \textbf{Case }\textrm{{#1}}: ~ }
+\newcommand{\ProofCaseRule}[1]{\item \textbf{Case }\textrm{{#1}}: ~}
 \newcommand{\ProofCaseThing}[1]{\ProofCaseRule{\ensuremath{#1}}}
-\newcommand{\ProofCasesRules}[1]{\item \textbf{Cases }\textrm{{#1}}: ~ }
+\newcommand{\ProofCasesRules}[1]{\item \textbf{Cases }\textrm{{#1}}: ~}
 \newcommand{\ProofCaseRuleNoColon}[1]{\item \textbf{Case }\textrm{{#1}}}
 
 \gdef\xxDerivationProofCaseColor{N}
@@ -653,7 +689,7 @@
      \item %
        \parbox[t]{100ex}{%
        \textbf{Case } \\[-0.5em]
-       $~$\hspace{5ex}
+       $~$\hspace*{5ex}
        \if\xxDerivationProofCaseColor N%
            \ensuremath{%
               \Infer{#1}{#2}{#3}%
@@ -674,7 +710,7 @@
      \item %
        \parbox[t]{100ex}{%
        \textbf{Case } \\[-0.5em]
-       $~$\hspace{5ex}
+       $~$\hspace*{5ex}
        \if\xxDerivationProofCaseColor N%
            \ensuremath{%
               \Infer{#1}{#2}{#3}%
@@ -687,6 +723,35 @@
                 \Infer{#1}{#2}{#3}%
                 ~~~~~
                 \Infer{#4}{#5}{#6}%
+              }%
+           }%
+        \fi%
+     }%
+     \nopagebreak \\[-0.8ex]
+  }
+
+\newcommand{\TripleDerivationProofCase}[9]{%
+     \smallskip
+     \item %
+       \parbox[t]{100ex}{%
+       \textbf{Case } \\[-0.5em]
+       $~$\hspace*{5ex}
+       \if\xxDerivationProofCaseColor N%
+           \ensuremath{%
+              \Infer{#1}{#2}{#3}%
+              ~~~~~
+              \Infer{#4}{#5}{#6}%
+              ~~~~~
+              \Infer{#7}{#8}{#9}%
+            }
+       \else%
+           \colorbox{\xxDerivationProofCaseColor}{%
+              \ensuremath{%
+                \Infer{#1}{#2}{#3}%
+                ~~~~~
+                \Infer{#4}{#5}{#6}%
+                ~~~~~
+                \Infer{#7}{#8}{#9}%
               }%
            }%
         \fi%

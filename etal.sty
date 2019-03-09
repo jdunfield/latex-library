@@ -1,17 +1,17 @@
-\ProvidesPackage{etal}[2015/04/17 - Extract from local]
+\ProvidesPackage{etal}[2018/05/15 - comment out st, add ih]
 
 \RequirePackage{xspace}
 
-% These are separate from joshua.sty, because I'd like everyone, everywhere,
-% to use them, and I realize not everyone wants the baggage of hundreds of
-% other macros.
+% These are separate from joshuadunfield.sty, because I'd like everyone,
+% everywhere, to use them, and I realize not everyone wants the baggage
+% of hundreds of other macros.
 %
 % These macros protect you from the following scourges:
 %
 %  1. Misspelled/mispunctuated ``et al.'', ``cf.'', ``e.g.'', ``i.e.'', ``\'a la'', and ``vis-\'a-vis''.
 %
 %  2. Too much space after the ``.'' in ``cf.'', etc., because TeX likes to guess
-%  that a ``.'' might end a sentence, but ``i.e.'' doesn't end a sentence.
+%  that a ``.'' might end a sentence, but ``cf.'' doesn't end a sentence.
 %
 %
 % \etal:
@@ -80,8 +80,10 @@
 \newcommand{\etal}{et al.\@\xspace}
 \newcommand{\eg}{e.g.\@\xspace}
 \newcommand{\ie}{i.e.\@\xspace}
+\newcommand{\ih}{i.h.\@\xspace}
 
 \newcommand{\cf}{cf.\ }
+% \newcommand{\st}{s.t.\ }
 
 \newcommand{\ala}{\`a la\ }
 \newcommand{\visavis}{vis-\`a-vis\ }

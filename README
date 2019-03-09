@@ -30,5 +30,10 @@ find (some of) this useful, so much the better.
 
 * example.tex: Example, currently only showing the "rules" class.
 
+* friendlyappendix.sty: Macros for structuring an appendix of omitted proofs in
+  conjunction with the "restatable" environment.
+
+* friendly-example.tex: An example of using friendlyappendix.sty.
+
 ----------------------------------------------------------------------------------------------------------------------------------------------
 Copyright (c) Joshua Dunfield; released under the terms of the GNU General Public License, version 2 or later.
