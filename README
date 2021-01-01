@@ -1,4 +1,4 @@
-I've been using LaTeX in anger for almost 15 years.  Over that time, I've been
+I've been using LaTeX in anger for more than 20 years.  For most of that time, I've been
 copying and pasting macros from the last-written paper to whichever one I'm currently
 working on.  This is barely adequate when I don't have coauthors, much less when I do.
 
@@ -20,8 +20,7 @@ find (some of) this useful, so much the better.
 * rulelinks.sty: Macros for inference rule names that hyperlink back to where the
   rule was defined.
 
-* purple.cls: A more colourful article class.  I wrote this recently and haven't
-  quite decided if I like it, so I wouldn't bet that you will.
+* purple.cls: A more colourful article class.  I use this for lecture notes.
 
 * mathpartir.sty: Didier Rémy's inference rules package.  I didn't write this,
   and I don't recall modifying it, but I've learned through hard
@@ -36,4 +35,4 @@ find (some of) this useful, so much the better.
 * friendly-example.tex: An example of using friendlyappendix.sty.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
-Copyright (c) Joshua Dunfield; released under the terms of the GNU General Public License, version 2 or later.
+Copyright (c) Jana Dunfield; released under the terms of the GNU General Public License, version 2 or later.
