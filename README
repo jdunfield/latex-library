@@ -6,7 +6,7 @@ The main purpose of this repository is to organize and document this tangle of
 macros, so my coauthors will be happier.  If you're not one of my coauthors, and you
 find (some of) this useful, so much the better.
 
-* jdunfield.sty: A semi-organized pack of wild macros (previously joshuadunfield.sty).
+* jdunfield.sty: A semi-organized pack of wild macros (previously j.....dunfield.sty).
 
 * goodcharter.sty: Use Bitstream Charter as the main font without making it
   impossible to use bold CM sans serif (as the charter.sty package does,
